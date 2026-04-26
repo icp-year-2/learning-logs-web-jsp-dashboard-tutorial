@@ -213,6 +213,30 @@ public class EntryDaoImpl implements EntryDao {
     // entries -> topics -> users so we can filter by user.
     //
     // See: references/01-aggregate-queries.md (JOIN Aggregates)
+    //
+    // The complete code:
+    //
+    //   @Override
+    //   public int countEntriesByUserId(int userId) {
+    //       Connection conn = null;
+    //       try {
+    //           conn = DatabaseConnection.getConnection();
+    //           String sql = "SELECT COUNT(*) AS count FROM entries e"
+    //                      + " JOIN topics t ON e.topic_id = t.id"
+    //                      + " WHERE t.user_id = ?";
+    //           PreparedStatement statement = conn.prepareStatement(sql);
+    //           statement.setInt(1, userId);
+    //           ResultSet rs = statement.executeQuery();
+    //           if (rs.next()) {
+    //               return rs.getInt("count");
+    //           }
+    //       } catch (SQLException e) {
+    //           System.out.println("Error counting entries: " + e.getMessage());
+    //       } finally {
+    //           DatabaseConnection.closeConnection(conn);
+    //       }
+    //       return 0;
+    //   }
     // ============================================================
     @Override
     public int countEntriesByUserId(int userId) {
@@ -253,6 +277,31 @@ public class EntryDaoImpl implements EntryDao {
     // part against CURDATE() (which has no time component).
     //
     // See: references/01-aggregate-queries.md (CURDATE)
+    //
+    // The complete code:
+    //
+    //   @Override
+    //   public int countEntriesTodayByUserId(int userId) {
+    //       Connection conn = null;
+    //       try {
+    //           conn = DatabaseConnection.getConnection();
+    //           String sql = "SELECT COUNT(*) AS count FROM entries e"
+    //                      + " JOIN topics t ON e.topic_id = t.id"
+    //                      + " WHERE t.user_id = ?"
+    //                      + " AND DATE(e.created_at) = CURDATE()";
+    //           PreparedStatement statement = conn.prepareStatement(sql);
+    //           statement.setInt(1, userId);
+    //           ResultSet rs = statement.executeQuery();
+    //           if (rs.next()) {
+    //               return rs.getInt("count");
+    //           }
+    //       } catch (SQLException e) {
+    //           System.out.println("Error counting entries today: " + e.getMessage());
+    //       } finally {
+    //           DatabaseConnection.closeConnection(conn);
+    //       }
+    //       return 0;
+    //   }
     // ============================================================
     @Override
     public int countEntriesTodayByUserId(int userId) {
