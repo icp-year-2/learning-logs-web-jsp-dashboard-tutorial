@@ -165,6 +165,8 @@ sql/seed.sql           -- adds sample data with spread dates
 
 The seed data uses `DATE_SUB(NOW(), INTERVAL n DAY)` so that dashboard analytics show meaningful values on first run.
 
+> **Note on "Entries Today":** The `countEntriesTodayByUserId` query compares `DATE(e.created_at)` against `CURDATE()`. Both use the **MySQL server's timezone**. If your MySQL timezone differs from your local time (e.g., MySQL is set to UTC while you're in NPT/UTC+5:45), entries seeded with `DATE_SUB(NOW(), INTERVAL 1 DAY)` might still fall on "today" from MySQL's perspective. This is expected — the query logic is correct, but the results depend on when you import the seed relative to your server's clock.
+
 ### 2. Build and Run
 
 ```bash
@@ -188,7 +190,8 @@ Then open: `http://localhost:9090/learning-logs/dashboard`
 |---------|----------|
 | All KPI cards show 0 | Run seed.sql to add sample data |
 | "Topics This Week" shows 0 | Seed data uses DATE_SUB — add a new topic manually to see a non-zero value for the current week |
-| "Entries Today" shows 0 | The seed creates 2 entries at NOW() — if you re-seeded on a different day, add a new entry |
+| "Entries Today" shows 0 | No seed entries have today's date — add a new entry manually, or check MySQL timezone (see note above) |
+| "Entries Today" shows unexpected value | MySQL timezone may differ from local time — `DATE_SUB(NOW(), INTERVAL 1 DAY)` can land on "today" if timezones are offset |
 | Blank dashboard page | Check DashboardServlet.doGet() forwards to the correct JSP path |
 | 404 on /dashboard | Verify @WebServlet("/dashboard") annotation on DashboardServlet |
 | fmt:formatDate error | Check that the fmt taglib import is at the top of dashboard.jsp |
