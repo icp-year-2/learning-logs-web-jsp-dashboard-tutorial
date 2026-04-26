@@ -58,25 +58,38 @@
              WHY fmt:formatDate: Formats java.sql.Timestamp into a
              human-readable date string.
 
-             The complete structure:
+             The complete code:
 
-               (div.kpi-grid)
-                 (div.kpi-card) (h3)Total Topics(/h3) (p.metric)${totalTopics}(/p) (/div)
-                 (div.kpi-card) (h3)Total Entries(/h3) (p.metric)${totalEntries}(/p) (/div)
-                 (div.kpi-card) (h3)Entries Today(/h3) (p.metric)${entriesToday}(/p) (/div)
-                 (div.kpi-card) (h3)Topics This Week(/h3) (p.metric)${topicsThisWeek}(/p) (/div)
-               (/div)
-               (div.recent-topics)
-                 (h3)Recent Topics(/h3)
-                 (ul)
-                   (c:forEach var="topic" items="${recentTopics}")
-                     (li)
-                       (a href="...entry?topicid=${topic.id}")(c:out value="${topic.name}" /)(/a)
-                       (span)(fmt:formatDate value="${topic.createdAt}" pattern="MMM d, yyyy" /)(/span)
-                     (/li)
-                   (/c:forEach)
-                 (/ul)
-               (/div)
+               <div class="kpi-grid">
+                 <div class="kpi-card">
+                   <h3>Total Topics</h3>
+                   <p class="metric">${totalTopics}</p>
+                 </div>
+                 <div class="kpi-card">
+                   <h3>Total Entries</h3>
+                   <p class="metric">${totalEntries}</p>
+                 </div>
+                 <div class="kpi-card">
+                   <h3>Entries Today</h3>
+                   <p class="metric">${entriesToday}</p>
+                 </div>
+                 <div class="kpi-card">
+                   <h3>Topics This Week</h3>
+                   <p class="metric">${topicsThisWeek}</p>
+                 </div>
+               </div>
+
+               <div class="recent-topics">
+                 <h3>Recent Topics</h3>
+                 <ul>
+                   <c:forEach var="topic" items="${recentTopics}">
+                     <li>
+                       <a href="${pageContext.request.contextPath}/entry?topicid=${topic.id}"><c:out value="${topic.name}" /></a>
+                       <span><fmt:formatDate value="${topic.createdAt}" pattern="MMM d, yyyy" /></span>
+                     </li>
+                   </c:forEach>
+                 </ul>
+               </div>
              ============================================================ --%>
 
         <div class="kpi-grid">

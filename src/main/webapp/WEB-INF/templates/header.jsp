@@ -22,10 +22,11 @@
            4. Keep the c:out inside the h3 for XSS safety
 
          The complete code:
-           (a href="${pageContext.request.contextPath}/dashboard"
-              style="text-decoration: none")
-             (h3)(c:out value="${sessionScope.user.username}" /)(/h3)
-           (/a)
+
+           <a href="${pageContext.request.contextPath}/dashboard"
+              style="text-decoration: none">
+             <h3><c:out value="${sessionScope.user.username}" /></h3>
+           </a>
          ============================================================ --%>
     <a href="${pageContext.request.contextPath}/dashboard" style="text-decoration: none">
       <h3><c:out value="${sessionScope.user.username}" /></h3>
