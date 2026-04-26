@@ -18,8 +18,8 @@
         <jsp:param name="back_title" value="" />
         <jsp:param name="back_href" value="" />
         <jsp:param name="page_title" value="Dashboard" />
-        <jsp:param name="add_title" value="" />
-        <jsp:param name="add_href" value="" />
+        <jsp:param name="add_title" value="My Topics >" />
+        <jsp:param name="add_href" value="${pageContext.request.contextPath}/topic" />
       </jsp:include>
 
       <main class="content">
