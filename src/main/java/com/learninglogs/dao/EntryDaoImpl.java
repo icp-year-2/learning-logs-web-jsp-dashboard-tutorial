@@ -214,25 +214,6 @@ public class EntryDaoImpl implements EntryDao {
     //
     // See: references/01-aggregate-queries.md (JOIN Aggregates)
     // ============================================================
-    @Override
-    public int countEntriesByUserId(int userId) {
-        Connection conn = null;
-        try {
-            conn = DatabaseConnection.getConnection();
-            String sql = "SELECT COUNT(*) AS count FROM entries e JOIN topics t ON e.topic_id = t.id WHERE t.user_id = ?";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, userId);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("count");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error counting entries: " + e.getMessage());
-        } finally {
-            DatabaseConnection.closeConnection(conn);
-        }
-        return 0;
-    }
 
     // ============================================================
     // TODO 6: Implement countEntriesTodayByUserId
@@ -254,23 +235,5 @@ public class EntryDaoImpl implements EntryDao {
     //
     // See: references/01-aggregate-queries.md (CURDATE)
     // ============================================================
-    @Override
-    public int countEntriesTodayByUserId(int userId) {
-        Connection conn = null;
-        try {
-            conn = DatabaseConnection.getConnection();
-            String sql = "SELECT COUNT(*) AS count FROM entries e JOIN topics t ON e.topic_id = t.id WHERE t.user_id = ? AND DATE(e.created_at) = CURDATE()";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, userId);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("count");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error counting entries today: " + e.getMessage());
-        } finally {
-            DatabaseConnection.closeConnection(conn);
-        }
-        return 0;
-    }
+
 }

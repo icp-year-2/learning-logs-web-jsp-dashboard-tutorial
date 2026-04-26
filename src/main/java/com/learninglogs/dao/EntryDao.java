@@ -24,7 +24,6 @@ public interface EntryDao {
     //
     // See: references/01-aggregate-queries.md (JOIN Aggregates)
     // ============================================================
-    int countEntriesByUserId(int userId);
 
     // ============================================================
     // TODO 6: Add countEntriesTodayByUserId Signature
@@ -36,5 +35,5 @@ public interface EntryDao {
     //
     // See: references/01-aggregate-queries.md (CURDATE)
     // ============================================================
-    int countEntriesTodayByUserId(int userId);
+
 }

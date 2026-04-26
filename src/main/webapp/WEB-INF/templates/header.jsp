@@ -27,9 +27,7 @@
              (h3)(c:out value="${sessionScope.user.username}" /)(/h3)
            (/a)
          ============================================================ --%>
-    <a href="${pageContext.request.contextPath}/dashboard" style="text-decoration: none">
-      <h3><c:out value="${sessionScope.user.username}" /></h3>
-    </a>
+    <h3><c:out value="${sessionScope.user.username}" /></h3>
     <a href="${pageContext.request.contextPath}/logout" class="logout"
        onclick="return confirm('Are you sure you want to logout?');">Logout</a>
   </div>
