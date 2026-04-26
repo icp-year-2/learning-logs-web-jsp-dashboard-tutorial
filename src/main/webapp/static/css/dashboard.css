@@ -1,0 +1,103 @@
+.content {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 20px 40px;
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.kpi-card {
+    background-color: #fff;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.kpi-card h3 {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.kpi-card .metric {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+}
+
+.recent-topics {
+    background-color: #fff;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.recent-topics h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--color-text-dark);
+}
+
+.recent-topics ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recent-topics li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.recent-topics li:last-child {
+    border-bottom: none;
+}
+
+.recent-topics li a {
+    text-decoration: none;
+    color: var(--color-text-dark);
+    font-weight: 500;
+}
+
+.recent-topics li a:hover {
+    opacity: 0.7;
+}
+
+.recent-topics li span {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.chart-container {
+    background-color: #fff;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 25px;
+}
+
+@media (max-width: 700px) {
+    .content {
+        padding: 10px;
+    }
+
+    .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 400px) {
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+}
