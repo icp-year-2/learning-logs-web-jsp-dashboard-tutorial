@@ -36,6 +36,12 @@ public interface TopicDao {
     //
     // WHY: Interfaces define the contract — the implementation
     // class (TopicDaoImpl) must provide the actual SQL queries.
+    //
+    // The complete code:
+    //
+    //   int countTopicsByUserId(int userId);
+    //   int countTopicsThisWeekByUserId(int userId);
+    //   ArrayList<Topic> fetchRecentTopicsByUserId(int userId, int limit);
     // ============================================================
 
 }

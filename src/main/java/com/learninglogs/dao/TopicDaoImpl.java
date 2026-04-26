@@ -274,6 +274,28 @@ public class TopicDaoImpl implements TopicDao {
     // WHY COUNT(*): We only need the number, not the actual rows.
     // This is more efficient than fetching all topics and calling
     // .size() on the list.
+    //
+    // The complete code:
+    //
+    //   @Override
+    //   public int countTopicsByUserId(int userId) {
+    //       Connection conn = null;
+    //       try {
+    //           conn = DatabaseConnection.getConnection();
+    //           String sql = "SELECT COUNT(*) AS count FROM topics WHERE user_id = ?";
+    //           PreparedStatement statement = conn.prepareStatement(sql);
+    //           statement.setInt(1, userId);
+    //           ResultSet rs = statement.executeQuery();
+    //           if (rs.next()) {
+    //               return rs.getInt("count");
+    //           }
+    //       } catch (SQLException e) {
+    //           System.out.println("Error counting topics: " + e.getMessage());
+    //       } finally {
+    //           DatabaseConnection.closeConnection(conn);
+    //       }
+    //       return 0;
+    //   }
     // ============================================================
 
     // ============================================================
@@ -294,6 +316,30 @@ public class TopicDaoImpl implements TopicDao {
     // calendar week of the current year.
     //
     // See: references/01-aggregate-queries.md
+    //
+    // The complete code:
+    //
+    //   @Override
+    //   public int countTopicsThisWeekByUserId(int userId) {
+    //       Connection conn = null;
+    //       try {
+    //           conn = DatabaseConnection.getConnection();
+    //           String sql = "SELECT COUNT(*) AS count FROM topics WHERE user_id = ?"
+    //                      + " AND WEEK(created_at) = WEEK(CURDATE())"
+    //                      + " AND YEAR(created_at) = YEAR(CURDATE())";
+    //           PreparedStatement statement = conn.prepareStatement(sql);
+    //           statement.setInt(1, userId);
+    //           ResultSet rs = statement.executeQuery();
+    //           if (rs.next()) {
+    //               return rs.getInt("count");
+    //           }
+    //       } catch (SQLException e) {
+    //           System.out.println("Error counting topics this week: " + e.getMessage());
+    //       } finally {
+    //           DatabaseConnection.closeConnection(conn);
+    //       }
+    //       return 0;
+    //   }
     // ============================================================
 
     // ============================================================
@@ -312,6 +358,37 @@ public class TopicDaoImpl implements TopicDao {
     // WHY ORDER BY created_at DESC: Newest topics first.
     // WHY LIMIT: Dashboard only shows a few recent items,
     // not the entire list.
+    //
+    // The complete code:
+    //
+    //   @Override
+    //   public ArrayList<Topic> fetchRecentTopicsByUserId(int userId, int limit) {
+    //       ArrayList<Topic> topics = new ArrayList<>();
+    //       Connection conn = null;
+    //       try {
+    //           conn = DatabaseConnection.getConnection();
+    //           String sql = "SELECT * FROM topics WHERE user_id = ? ORDER BY created_at DESC LIMIT ?";
+    //           PreparedStatement statement = conn.prepareStatement(sql);
+    //           statement.setInt(1, userId);
+    //           statement.setInt(2, limit);
+    //           ResultSet rs = statement.executeQuery();
+    //           while (rs.next()) {
+    //               Topic topic = new Topic(
+    //                   rs.getInt("id"),
+    //                   rs.getString("name"),
+    //                   rs.getInt("user_id"),
+    //                   rs.getTimestamp("created_at"),
+    //                   rs.getTimestamp("updated_at")
+    //               );
+    //               topics.add(topic);
+    //           }
+    //       } catch (SQLException e) {
+    //           System.out.println("Error fetching recent topics: " + e.getMessage());
+    //       } finally {
+    //           DatabaseConnection.closeConnection(conn);
+    //       }
+    //       return topics;
+    //   }
     // ============================================================
 
 }

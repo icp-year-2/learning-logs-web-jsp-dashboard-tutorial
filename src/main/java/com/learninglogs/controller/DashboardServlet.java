@@ -54,6 +54,25 @@ public class DashboardServlet extends HttpServlet {
     // The JSP only handles presentation, never database access.
     //
     // See: references/02-dashboard-servlet-pattern.md
+    //
+    // The complete code:
+    //
+    //   User user = (User) SessionUtil.getAttribute(request, "user");
+    //
+    //   int totalTopics = topicDao.countTopicsByUserId(user.getId());
+    //   int topicsThisWeek = topicDao.countTopicsThisWeekByUserId(user.getId());
+    //   ArrayList<Topic> recentTopics = topicDao.fetchRecentTopicsByUserId(user.getId(), 5);
+    //   int totalEntries = entryDao.countEntriesByUserId(user.getId());
+    //   int entriesToday = entryDao.countEntriesTodayByUserId(user.getId());
+    //
+    //   request.setAttribute("totalTopics", totalTopics);
+    //   request.setAttribute("topicsThisWeek", topicsThisWeek);
+    //   request.setAttribute("recentTopics", recentTopics);
+    //   request.setAttribute("totalEntries", totalEntries);
+    //   request.setAttribute("entriesToday", entriesToday);
+    //
+    //   request.getRequestDispatcher("/WEB-INF/views/dashboard.jsp")
+    //          .forward(request, response);
     // ============================================================
     @Override
     protected void doGet(HttpServletRequest request,

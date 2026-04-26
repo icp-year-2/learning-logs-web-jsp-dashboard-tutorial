@@ -23,6 +23,10 @@ public interface EntryDao {
     //   int countEntriesByUserId(int userId)
     //
     // See: references/01-aggregate-queries.md (JOIN Aggregates)
+    //
+    // The complete code:
+    //
+    //   int countEntriesByUserId(int userId);
     // ============================================================
 
     // ============================================================
@@ -34,6 +38,10 @@ public interface EntryDao {
     //   int countEntriesTodayByUserId(int userId)
     //
     // See: references/01-aggregate-queries.md (CURDATE)
+    //
+    // The complete code:
+    //
+    //   int countEntriesTodayByUserId(int userId);
     // ============================================================
 
 }
